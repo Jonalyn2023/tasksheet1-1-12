@@ -1,0 +1,85 @@
+// 1. Define an interface called Shape with the following methods:
+interface Shape {
+  // calculateArea(): double (Math.PI * radius * radius; )
+  double calculateArea();
+
+  // calculatePerimeter(): double (2 * Math.PI * radius; )
+  double calculatePerimeter();
+}
+
+// 2. Create an abstract class called AbstractShape that implements the Shape interface.
+abstract class AbstractShape implements Shape {
+  // Instance variables to represent common attributes of shapes.
+  // String color, double length, double width
+  String color;
+  double length;
+  double width;
+
+  // A constructor to initialize these attributes.
+  public AbstractShape(String color, double length, double width) {
+    this.color = color;
+    this.length = length;
+    this.width = width;
+  }
+
+  // Implementations for the calculateArea and calculatePerimeter methods.
+  public double calculateArea() {
+    return length * width;
+  }
+
+  public double calculatePerimeter() {
+    return 2 * (length + width);
+  }
+}
+
+// 3. Implement two concrete classes that extend AbstractShape:
+// Circle: Representing a circle. Include a radius as an attribute.
+class Circle extends AbstractShape {
+  // radius as an attribute
+  double radius;
+
+  // constructor to initialize the radius and the color
+  public Circle(double radius, String color) {
+    // call the super constructor with length and width equal to the diameter
+    super(color, 2 * radius, 2 * radius);
+    this.radius = radius;
+  }
+
+  // override the calculateArea and calculatePerimeter methods
+  public double calculateArea() {
+    // use Math.PI * radius * radius
+    return Math.PI * radius * radius;
+  }
+
+  public double calculatePerimeter() {
+    // use 2 * Math.PI * radius
+    return 2 * Math.PI * radius;
+  }
+}
+
+// Rectangle: Representing a rectangle. Include length and width as attributes.
+class Rectangle extends AbstractShape {
+  // constructor to initialize the length, width and color
+  public Rectangle(double length, double width, String color) {
+    // call the super constructor with the same parameters
+    super(color, length, width);
+  }
+
+  // no need to override the calculateArea and calculatePerimeter methods
+  // as they are inherited from the abstract class
+}
+
+// 4. In the Main class:
+public class Main {
+  public static void main(String[] args) {
+    // Create instances of Circle and Rectangle.
+    Circle circle = new Circle(5, "red");
+    Rectangle rectangle = new Rectangle(10, 20, "blue");
+
+    // Display their areas and perimeters
+    System.out.println("The area of the circle is " + circle.calculateArea());
+    System.out.println("The perimeter of the circle is " + circle.calculatePerimeter());
+    System.out.println("The area of the rectangle is " + rectangle.calculateArea());
+    System.out.println("The perimeter of the rectangle is " + rectangle.calculatePerimeter());
+  }
+}
